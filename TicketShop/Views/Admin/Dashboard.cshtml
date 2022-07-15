@@ -1,0 +1,52 @@
+﻿@model DashboardViewModel
+
+@{ 
+    ViewData["Title"] = "Dashboard";
+}
+<h1>Dashboard</h1>
+<div class="row">
+    <div class="movies-tickets col">
+        <div class="movies">
+            <h2>Movies</h2>
+            @foreach (var movie in Model.Movies)
+            {
+                <div>
+                    <img src="@movie.MovieImageUrl" alt="Movie Poster" />
+                    <h2>@movie.MovieTitle</h2>
+                    <p>@movie.MovieSynopsis</p>
+                    <h5>@movie.MovieLength</h5>
+                    <p>@movie.MovieGenre</p>
+                </div>
+            }
+        </div>
+        <div class="tickets">
+            <h2>Tickets</h2>
+            @foreach (var ticket in Model.Tickets)
+            {
+                <div>
+                    <p>@ticket.TicketPrice</p>
+                    <p>@ticket.TicketStock</p>
+                    <h2>@ticket.TicketIsInStock</h2>
+                </div>
+            }
+        </div>
+    </div>
+    
+    <div class="purchase-history col">
+        <h2>Purchases</h2>
+        @foreach (var purchase in Model.Purchases)
+        {
+            <p>@purchase.Buyer</p>
+            <p>@purchase.PurchasePrice</p>
+            <p>@purchase.Amount</p>
+            <p>@purchase.DateOfPurchase</p>
+            <div>
+                <img src="@purchase.Movie.MovieImageUrl" alt="Movie Poster" />
+                <p>@purchase.Movie.MovieTitle</p>
+                <p>@purchase.Movie.MovieSynopsis</p>
+                <p>@purchase.Movie.MovieLength</p>
+                <p>@purchase.Movie.MovieGenre</p>
+            </div>
+        }
+    </div>
+</div>

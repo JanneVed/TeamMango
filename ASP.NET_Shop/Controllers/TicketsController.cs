@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ASP.NET_Shop.Data;
 using ASP.NET_Shop.Models;
+using ASP.NET_Shop.Logics;
 
 namespace ASP.NET_Shop.Controllers
 {
@@ -61,6 +62,7 @@ namespace ASP.NET_Shop.Controllers
         {
             if (ModelState.IsValid)
             {
+                StockManager.SetInStockStatus(ticket);
                 _context.Add(ticket);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -102,6 +104,8 @@ namespace ASP.NET_Shop.Controllers
             {
                 try
                 {
+                    StockManager.SetInStockStatus(ticket);
+                    PriceManager.ToggleDiscount(ticket);
                     _context.Update(ticket);
                     await _context.SaveChangesAsync();
                 }

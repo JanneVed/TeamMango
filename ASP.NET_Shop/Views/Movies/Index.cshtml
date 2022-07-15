@@ -34,7 +34,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MovieImageUrl)
+                <img src="@Html.DisplayFor(modelItem => item.MovieImageUrl)"/>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MovieTitle)

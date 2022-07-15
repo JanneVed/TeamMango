@@ -15,8 +15,8 @@ namespace ASP.NET_Shop.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.26")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "3.1.26")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ASP.NET_Shop.Models.Movie", b =>
@@ -185,6 +185,10 @@ namespace ASP.NET_Shop.Migrations
                     b.HasOne("ASP.NET_Shop.Models.Ticket", "Ticket")
                         .WithMany()
                         .HasForeignKey("TicketId");
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("ASP.NET_Shop.Models.Ticket", b =>
@@ -194,6 +198,13 @@ namespace ASP.NET_Shop.Migrations
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("ASP.NET_Shop.Models.Movie", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

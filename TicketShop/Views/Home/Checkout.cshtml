@@ -1,0 +1,54 @@
+﻿@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="row">
+    <div class="col">
+        <img src="@Model.Movie.MovieImageUrl" alt="Movie Poster" />
+        <h2>@Model.Movie.MovieTitle</h2>
+        <p>@Model.Movie.MovieSynopsis</p>
+        <h5>@Model.Movie.MovieLength</h5>
+        <p>@Model.Movie.MovieGenre</p>
+    </div>
+    <div class="col">
+        <form action="@Model.GoTo" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <label asp-for="Buyer">Card Number: </label>
+            <input asp-for="Buyer" asp-controller="home" asp-action="@Model.GoTo" type="number" />
+
+            <label for="expiredate">Expire date:</label>
+            <input class="expiredate" type="number" />/<input class="expiredate" type="number" />
+
+            <label for="cvc">CVC:</label>
+            <input id="cvc" type="text" />
+
+            @if (Model.Code == "Redeemed!")
+            {
+                <p>Code @Model.Code</p>
+            }
+
+            <p id="ticket-price">$@Model.PurchasePrice</p>
+            <p>@Model.Amount ticket(s)</p>
+
+            <input asp-for="PurchasePrice" asp-controller="home" asp-action="@Model.GoTo" type="hidden" value="@Model.PurchasePrice" readonly="readonly" />
+            <input asp-for="Amount" asp-controller="home" asp-action="@Model.GoTo" type="hidden" value="@Model.Amount" readonly="readonly" />
+            <input asp-for="TicketId" asp-controller="home" asp-action="@Model.GoTo" type="hidden" value="@Model.TicketId" readonly="readonly" />
+            <input asp-for="MovieId" asp-controller="home" asp-action="@Model.GoTo" type="hidden" value="@Model.MovieId" readonly="readonly" />
+
+            @{
+                if (Model.PurchasePrice == Model.Ticket.TicketPrice || Model.PurchasePrice > Model.Ticket.TicketPrice)
+                {
+                    if (ViewBag.wrong != null)
+                    {
+                        <p>Viewbag.wrong</p>
+                    }
+                    <label asp-for="Code">Add a promo code to get a price reduction!</label>
+                    <input asp-for="Code" asp-controller="home" asp-action="@Model.GoTo" type="text" />
+                    <button type="submit">Apply</button>
+                }
+            }
+            <button type="submit">Checkout</button>
+        </form>
+    </div>
+</div>

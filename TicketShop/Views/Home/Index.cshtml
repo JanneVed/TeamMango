@@ -1,0 +1,41 @@
+﻿@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row">
+    @foreach (var movieModel in Model.Movies)
+    {
+    <div class="col">
+        <img src="@movieModel.MovieImageUrl" alt="Movie Poster" />
+        <h2>@movieModel.MovieTitle</h2>
+        <p>@movieModel.MovieSynopsis</p>
+        <h5>@movieModel.MovieLength</h5>
+        <p>@movieModel.MovieGenre</p>
+
+        @foreach (var ticketModel in Model.Tickets)
+        {
+            if (ticketModel.MovieId == movieModel.MovieId)
+            {
+                <p>Tickets in stock: @ticketModel.TicketStock</p>
+                <p>Ticket Price: @ticketModel.TicketPrice</p>
+
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <label asp-for="Amount">How many Ticket do you need?</label>
+                    <input asp-for="Amount" asp-controller="home" asp-action="checkout" type="number" />
+                    <input asp-for="TicketId" asp-controller="home" asp-action="checkout" type="hidden" value="@ticketModel.TicketId" readonly="readonly"/>
+                    <input asp-for="MovieId" asp-controller="home" asp-action="checkout" type="hidden" value="@movieModel.MovieId" readonly="readonly"/>
+
+                    <button type="submit">Buy</button>
+                </form>
+            }
+        }
+    </div>
+    }
+</div>
