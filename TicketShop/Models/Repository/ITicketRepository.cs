@@ -10,5 +10,7 @@ namespace TicketShop.Models.Repository
         public TicketModel UpdateTicket(TicketModel ticketChanges);
         public IEnumerable<TicketModel> GetAllTickets();
         public TicketModel GetTicket(int ticketId);
+        public TicketModel RemoveTicket(int ticketId);
+        public TicketModel AddTicket(TicketModel newTicket);
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TicketShop.ViewModels
+namespace TicketShop.Objects
 {
-    public class CCViewModel
+    public class Convert
     {
         public string ConvertTo { get; set; }
     }

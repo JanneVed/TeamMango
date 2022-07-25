@@ -15,5 +15,7 @@ namespace TicketShop.ViewModels
         public MovieModel Movie { get; set; }
         public string ConvertTo { get; set; }
         public string CurrencySymbol { get; set; }
+        public string AddOrRemove { get; set; }
+        public string MovieOrTicket { get; set; }
     }
 }

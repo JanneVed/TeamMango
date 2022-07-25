@@ -31,15 +31,15 @@ namespace TicketShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public IActionResult Login(LoginViewModel account)
         {
             if (ModelState.IsValid)
             {
                 foreach (var item in _AccountContext.GetAccounts())
                 {
-                    if (model.UserName == item.UserName)
+                    if (account.UserName == item.UserName)
                     {
-                        if (model.Password == item.Password)
+                        if (account.Password == item.Password)
                         {
                             if (item.IsAdmin)
                             {
@@ -47,7 +47,7 @@ namespace TicketShop.Controllers
                             }
                             else if (item.IsAdmin == false)
                             {
-                                return RedirectToAction("index", "home");
+                                return RedirectToAction("home", "index");
                             }
                         }
                     }
@@ -95,7 +95,7 @@ namespace TicketShop.Controllers
             return View(dashboardViewModel);
         }
         [HttpPost]
-        public IActionResult Dashboard(TicketModel ticket, MovieModel movie, CCViewModel model)
+        public IActionResult Dashboard(TicketModel ticket, MovieModel movie, Convert convert)
         {
             if (ticket.TicketId != 0)
             {
@@ -106,11 +106,41 @@ namespace TicketShop.Controllers
                 _MovieContext.UpdateMovie(movie);
             }
 
-            if (model.ConvertTo != null)
+            if (convert.ConvertTo != null)
             {
-                return RedirectToAction("dashboard", model);
+                return RedirectToAction("dashboard", convert);
             }
 
+            return RedirectToAction("dashboard");
+        }
+
+        [HttpPost]
+        public IActionResult AddOrRemove(TicketModel ticket, MovieModel movie, Operation operation)
+        {
+            if (operation.AddOrRemove == "Remove")
+            {
+                if (ticket.TicketId != 0)
+                {
+                    _TicketContext.RemoveTicket(ticket.TicketId);
+                }
+                else if (movie.MovieId != 0)
+                {
+                    _MovieContext.RemoveMovie(movie.MovieId);
+                }
+                return RedirectToAction("dashboard");
+            }
+            else if (operation.AddOrRemove == "Add")
+            {
+                if (operation.MovieOrTicket == "Ticket")
+                {
+                    _TicketContext.AddTicket(ticket);
+                }
+                else if (operation.MovieOrTicket == "Movie")
+                {
+                    _MovieContext.AddMovie(movie);
+                }
+                return RedirectToAction("dashboard");
+            }
             return RedirectToAction("dashboard");
         }
     }

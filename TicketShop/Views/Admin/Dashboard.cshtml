@@ -5,60 +5,125 @@
 }
 <h1>Dashboard</h1>
 <div class="row">
+    <div class="add-or-remove col">
+        <div class="movies">
+            <h2>Add Movie</h2>
+            <form asp-controller="Admin" asp-action="AddOrRemove" method="post">
+                <label asp-for="Movie.MovieImageUrl">Image URL</label>
+                <input asp-for="Movie.MovieImageUrl" asp-controller="admin" asp-action="addorremove" type="text" />
+
+                <label asp-for="Movie.MovieTitle">Movie Title</label>
+                <input asp-for="Movie.MovieTitle" asp-controller="admin" asp-action="addorremove" type="text" />
+
+                <label asp-for="Movie.MovieSynopsis">Movie Synopsis</label>
+                <input asp-for="Movie.MovieSynopsis" asp-controller="admin" asp-action="addorremove" type="text" />
+
+                <label asp-for="Movie.MovieLength">Movie Length</label>
+                <input asp-for="Movie.MovieLength" asp-controller="admin" asp-action="addorremove" type="text" />
+
+                <label asp-for="Movie.MovieGenre">Movie Genre</label>
+                <input asp-for="Movie.MovieGenre" asp-controller="admin" asp-action="addorremove" type="text" />
+
+                <input asp-for="MovieOrTicket" asp-controller="admin" asp-action="addorremove" type="hidden" value="Movie" readonly="readonly"/>
+                <input asp-for="AddOrRemove" asp-controller="admin" asp-action="addorremove" type="hidden" value="Add" readonly="readonly"/>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        
+        <div class="tickets">
+            <h2>Add Tickets</h2>
+            <form asp-controller="Admin" asp-action="AddOrRemove" method="post">
+                <label asp-for="Ticket.TicketPrice">Price</label>
+                <input asp-for="Ticket.TicketPrice" asp-controller="admin" asp-action="addorremove" type="text" />
+
+                <label asp-for="Ticket.TicketStock">Stock</label>
+                <input asp-for="Ticket.TicketStock" asp-controller="admin" asp-action="addorremove" type="number" />
+
+                <label asp-for="Ticket.MovieId">Movie ID</label>
+                <input asp-for="Ticket.MovieId" asp-controller="admin" asp-action="addorremove" type="number" />
+
+                <input asp-for="Ticket.TicketIsInStock" asp-controller="admin" asp-action="addorremove" type="hidden" value="True" readonly="readonly" />
+                <input asp-for="MovieOrTicket" asp-controller="admin" asp-action="addorremove" type="hidden" value="Ticket" readonly="readonly" />
+                <input asp-for="AddOrRemove" asp-controller="admin" asp-action="addorremove" type="hidden" value="Add" readonly="readonly" />
+                <button type="submit">ADD</button>
+            </form>
+        </div>
+    </div>
     <div class="movies-tickets col">
         <div class="movies">
             <h2>Movies</h2>
             @foreach (var movie in Model.Movies)
             {
-        <div class="card card-body" style="width: 22rem; padding-top: 1rem;">
-            <img src="@movie.MovieImageUrl" alt="Movie Poster" />
-            <h3>@movie.MovieTitle</h3>
-            <p>@movie.MovieSynopsis</p>
-            <h5>@movie.MovieLength</h5>
-            <p>@movie.MovieGenre</p>
+                <div class="card card-body" style="width: 22rem; padding-top: 1rem;">
+                    @* Display *@
+                    <h6>Movie ID: @movie.MovieId</h6>
+                    <img src="@movie.MovieImageUrl" alt="Movie Poster" />
+                    <h3>@movie.MovieTitle</h3>
+                    <p>@movie.MovieSynopsis</p>
+                    <h5>@movie.MovieLength</h5>
+                    <p>@movie.MovieGenre</p>
 
-            <form method="post">
-                <label asp-for="Movie.MovieImageUrl">Image URL</label>
-                <input asp-for="Movie.MovieImageUrl" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieImageUrl" />
+                    @* Remove *@
+                    <form asp-controller="Admin" asp-action="AddOrRemove" method="post">
+                        <input asp-for="Movie.MovieId" asp-controller="admin" asp-action="addorremove" type="hidden" value="@movie.MovieId" readonly="readonly" />
+                        <input asp-for="AddOrRemove" asp-controller="admin" asp-action="addorremove" type="hidden" value="Remove" readonly="readonly" />
+                        <button type="submit">Remove</button>
+                    </form>
 
-                <label asp-for="Movie.MovieTitle">Movie Title</label>
-                <input asp-for="Movie.MovieTitle" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieTitle" />
+                    @* Edit *@
+                    <form asp-controller="Admin" asp-action="Dashboard" method="post">
+                        <label asp-for="Movie.MovieImageUrl">Image URL</label>
+                        <input asp-for="Movie.MovieImageUrl" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieImageUrl" />
 
-                <label asp-for="Movie.MovieSynopsis">Movie Synopsis</label>
-                <input asp-for="Movie.MovieSynopsis" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieSynopsis" />
+                        <label asp-for="Movie.MovieTitle">Movie Title</label>
+                        <input asp-for="Movie.MovieTitle" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieTitle" />
 
-                <label asp-for="Movie.MovieLength">Movie Length</label>
-                <input asp-for="Movie.MovieLength" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieLength" />
+                        <label asp-for="Movie.MovieSynopsis">Movie Synopsis</label>
+                        <input asp-for="Movie.MovieSynopsis" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieSynopsis" />
 
-                <label asp-for="Movie.MovieGenre">Movie Genre</label>
-                <input asp-for="Movie.MovieGenre" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieGenre" />
+                        <label asp-for="Movie.MovieLength">Movie Length</label>
+                        <input asp-for="Movie.MovieLength" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieLength" />
 
-                <input asp-for="Movie.MovieId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@movie.MovieId" />
-                <button type="submit">Apply Changes</button>
-            </form>
-        </div>
+                        <label asp-for="Movie.MovieGenre">Movie Genre</label>
+                        <input asp-for="Movie.MovieGenre" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieGenre" />
+
+                        <input asp-for="Movie.MovieId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@movie.MovieId" readonly="readonly" />
+                        <button type="submit">Apply Changes</button>
+                    </form>
+                </div>
             }
         </div>
+
         <div class="tickets">
             <h2>Tickets</h2>
             @foreach (var ticket in Model.Tickets)
             {
-        <div class="card card-body" style="width: 22rem; padding-top: 1rem;">
-            <p>Price: @ticket.TicketPrice</p>
-            <p>In stock: @ticket.TicketStock</p>
-            <p>Is in stock? @ticket.TicketIsInStock</p>
+                <div class="card card-body" style="width: 22rem; padding-top: 1rem;">
+                    @* Display *@
+                    <h6>For Movie ID: @ticket.MovieId</h6>
+                    <p>Price: @ticket.TicketPrice</p>
+                    <p>In stock: @ticket.TicketStock</p>
+                    <p>Is in stock? @ticket.TicketIsInStock</p>
 
-            <form method="post">
-                <label asp-for="Ticket.TicketPrice">Price</label>
-                <input asp-for="Ticket.TicketPrice" asp-controller="admin" asp-action="dashboard" type="text" value="@ticket.TicketPrice" />
+                    @* Remove *@
+                    <form asp-controller="Admin" asp-action="AddOrRemove" method="post">
+                        <input asp-for="Ticket.TicketId" asp-controller="admin" asp-action="addorremove" type="hidden" value="@ticket.TicketId" readonly="readonly" />
+                        <input asp-for="AddOrRemove" asp-controller="admin" asp-action="addorremove" type="hidden" value="Remove" readonly="readonly" />
+                        <button type="submit">Remove</button>
+                    </form>
 
-                <label asp-for="Ticket.TicketStock">Stock</label>
-                <input asp-for="Ticket.TicketStock" asp-controller="admin" asp-action="dashboard" type="number" value="@ticket.TicketStock" />
+                    @* Edit *@
+                    <form asp-controller="Admin" asp-action="Dashboard" method="post">
+                        <label asp-for="Ticket.TicketPrice">Price</label>
+                        <input asp-for="Ticket.TicketPrice" asp-controller="admin" asp-action="dashboard" type="text" value="@ticket.TicketPrice" />
 
-                <input asp-for="Ticket.TicketId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@ticket.TicketId" />
-                <button type="submit">Apply Changes</button>
-            </form>
-        </div>
+                        <label asp-for="Ticket.TicketStock">Stock</label>
+                        <input asp-for="Ticket.TicketStock" asp-controller="admin" asp-action="dashboard" type="number" value="@ticket.TicketStock" />
+
+                        <input asp-for="Ticket.TicketId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@ticket.TicketId" readonly="readonly" />
+                        <button type="submit">Apply Changes</button>
+                    </form>
+                </div>
             }
         </div>
     </div>
@@ -79,7 +144,7 @@
                 <p>@purchase.Movie.MovieGenre</p>
             </div>
         }
-    <form method="post">
+    <form asp-controller="Admin" asp-action="Dashboard" method="post">
         <label asp-for="ConvertTo">USD</label>
         <input asp-for="ConvertTo" asp-controller="admin" asp-action="dashboard" type="radio" value="USD" />
         <label asp-for="ConvertTo">SEK</label>
