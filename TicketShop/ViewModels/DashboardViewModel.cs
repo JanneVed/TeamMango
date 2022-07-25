@@ -11,5 +11,9 @@ namespace TicketShop.ViewModels
         public IEnumerable<MovieModel> Movies { get; set; }
         public IEnumerable<TicketModel> Tickets { get; set; }
         public IEnumerable<PurchaseModel> Purchases { get; set; }
+        public TicketModel Ticket { get; set; }
+        public MovieModel Movie { get; set; }
+        public string ConvertTo { get; set; }
+        public string CurrencySymbol { get; set; }
     }
 }

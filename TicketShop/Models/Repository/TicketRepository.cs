@@ -27,7 +27,7 @@ namespace TicketShop.Models.Repository
             return ticket;
         }
 
-        public TicketModel Update(TicketModel ticketChanges)
+        public TicketModel UpdateTicket(TicketModel ticketChanges)
         {
             var ticket = _Context.Tickets.Attach(ticketChanges);
             ticket.State = Microsoft.EntityFrameworkCore.EntityState.Modified;

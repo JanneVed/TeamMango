@@ -64,7 +64,7 @@ namespace TicketShop.Controllers
         {
             var purchasedTicket = _TicketRepo.GetTicket(purchase.TicketId);
             purchasedTicket.TicketStock -= purchase.Amount;
-            _TicketRepo.Update(purchasedTicket);
+            _TicketRepo.UpdateTicket(purchasedTicket);
 
             purchase.DateOfPurchase = DateTime.Now;
             _PurchaseRepo.CreateNewPurchase(purchase);

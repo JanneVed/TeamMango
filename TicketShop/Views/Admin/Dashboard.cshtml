@@ -17,6 +17,25 @@
                     <h5>@movie.MovieLength</h5>
                     <p>@movie.MovieGenre</p>
                 </div>
+                <form method="post">
+                    <label asp-for="Movie.MovieImageUrl">Image URL</label>
+                    <input asp-for="Movie.MovieImageUrl" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieImageUrl" />
+
+                    <label asp-for="Movie.MovieTitle">Movie Title</label>
+                    <input asp-for="Movie.MovieTitle" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieTitle" />
+
+                    <label asp-for="Movie.MovieSynopsis">Movie Synopsis</label>
+                    <input asp-for="Movie.MovieSynopsis" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieSynopsis" />
+
+                    <label asp-for="Movie.MovieLength">Movie Length</label>
+                    <input asp-for="Movie.MovieLength" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieLength" />
+
+                    <label asp-for="Movie.MovieGenre">Movie Genre</label>
+                    <input asp-for="Movie.MovieGenre" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieGenre" />
+
+                    <input asp-for="Movie.MovieId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@movie.MovieId" />
+                    <button type="submit">Apply Changes</button>
+                </form>
             }
         </div>
         <div class="tickets">
@@ -26,8 +45,18 @@
                 <div>
                     <p>@ticket.TicketPrice</p>
                     <p>@ticket.TicketStock</p>
-                    <h2>@ticket.TicketIsInStock</h2>
+                    <h3>@ticket.TicketIsInStock</h3>
                 </div>
+                <form method="post">
+                    <label asp-for="Ticket.TicketPrice">Price</label>
+                    <input asp-for="Ticket.TicketPrice" asp-controller="admin" asp-action="dashboard" type="text" value="@ticket.TicketPrice"/>
+
+                    <label asp-for="Ticket.TicketStock">Stock</label>
+                    <input asp-for="Ticket.TicketStock" asp-controller="admin" asp-action="dashboard" type="number" value="@ticket.TicketStock"/>
+
+                    <input asp-for="Ticket.TicketId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@ticket.TicketId" />
+                    <button type="submit">Apply Changes</button>
+                </form>
             }
         </div>
     </div>
@@ -37,7 +66,7 @@
         @foreach (var purchase in Model.Purchases)
         {
             <p>@purchase.Buyer</p>
-            <p>@purchase.PurchasePrice</p>
+            <p>@purchase.PurchasePrice@Model.CurrencySymbol</p>
             <p>@purchase.Amount</p>
             <p>@purchase.DateOfPurchase</p>
             <div>
@@ -48,5 +77,14 @@
                 <p>@purchase.Movie.MovieGenre</p>
             </div>
         }
+    <form method="post">
+        <label asp-for="ConvertTo">USD</label>
+        <input asp-for="ConvertTo" asp-controller="admin" asp-action="dashboard" type="radio" value="USD" />
+        <label asp-for="ConvertTo">SEK</label>
+        <input asp-for="ConvertTo" asp-controller="admin" asp-action="dashboard" type="radio" value="SEK" />
+        <label asp-for="ConvertTo">EUR</label>
+        <input asp-for="ConvertTo" asp-controller="admin" asp-action="dashboard" type="radio" value="EUR" />
+        <button type="submit">Apply</button>
+    </form>
     </div>
 </div>

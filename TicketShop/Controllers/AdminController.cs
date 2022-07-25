@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TicketShop.Models;
 using TicketShop.Models.Repository;
 using TicketShop.ViewModels;
+using TicketShop.Objects;
+using TicketShop.Logics;
 
 namespace TicketShop.Controllers
 {
@@ -59,20 +57,59 @@ namespace TicketShop.Controllers
         }
 
         [HttpGet]
-        public IActionResult Dashboard()
+        public IActionResult Dashboard(DashboardViewModel dashboardViewModel)
         {
-            var dashboardViewModel = new DashboardViewModel()
+
+            dashboardViewModel.Tickets = _TicketContext.GetAllTickets();
+            dashboardViewModel.Movies = _MovieContext.GetAllMovies();
+            dashboardViewModel.Purchases = _PurchaseContext.GetAllPurchases();
+
+            if (dashboardViewModel.ConvertTo == null)
             {
-                Tickets = _TicketContext.GetAllTickets(),
-                Movies = _MovieContext.GetAllMovies(),
-                Purchases = _PurchaseContext.GetAllPurchases()
-            };
+                dashboardViewModel.CurrencySymbol = "$";
+                dashboardViewModel.ConvertTo = "USD";
+            }
+            else if (dashboardViewModel.ConvertTo == "USD")
+            {
+                dashboardViewModel.CurrencySymbol = "$";
+            }
+            else if (dashboardViewModel.ConvertTo == "EUR")
+            {
+                foreach (var purchase in dashboardViewModel.Purchases)
+                {
+                    var result = APICalls.GetCurrencyConversionAPI(dashboardViewModel.ConvertTo, purchase.PurchasePrice);
+                    purchase.PurchasePrice = result.Result;
+                }
+                dashboardViewModel.CurrencySymbol = "€";
+            }
+            else if (dashboardViewModel.ConvertTo == "SEK")
+            {
+                foreach (var purchase in dashboardViewModel.Purchases)
+                {
+                    var result = APICalls.GetCurrencyConversionAPI(dashboardViewModel.ConvertTo, purchase.PurchasePrice);
+                    purchase.PurchasePrice = result.Result;
+                }
+                dashboardViewModel.CurrencySymbol = "kr";
+            }
+
             return View(dashboardViewModel);
         }
         [HttpPost]
-        public IActionResult Dashboard(TicketModel ticket, MovieModel movie)
+        public IActionResult Dashboard(TicketModel ticket, MovieModel movie, CCViewModel model)
         {
-            _TicketContext.Update(ticket);
+            if (ticket.TicketId != 0)
+            {
+                _TicketContext.UpdateTicket(ticket);
+            }
+            else if (movie.MovieId != 0)
+            {
+                _MovieContext.UpdateMovie(movie);
+            }
+
+            if (model.ConvertTo != null)
+            {
+                return RedirectToAction("dashboard", model);
+            }
 
             return RedirectToAction("dashboard");
         }

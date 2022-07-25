@@ -7,7 +7,7 @@ namespace TicketShop.Models.Repository
 {
     public interface ITicketRepository
     {
-        public TicketModel Update(TicketModel ticketChanges);
+        public TicketModel UpdateTicket(TicketModel ticketChanges);
         public IEnumerable<TicketModel> GetAllTickets();
         public TicketModel GetTicket(int ticketId);
     }
