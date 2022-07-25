@@ -419,8 +419,13 @@ h6, .h6 {
 
 .display-4 {
     font-size: 3.5rem;
-    font-weight: 300;
+    font-weight: 500;
     line-height: 1.2;
+    background-image: linear-gradient(#ffc107, #a52a2a);
+    color: black;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-box-decoration-break: clone;
 }
 
 hr {
@@ -4994,9 +4999,9 @@ input[type="button"].btn-block {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #282828;
+    background-color: #000;
     background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
+    border: 1px solid rgba(255, 136, 0, 0.4);
     border-radius: 0.25rem;
 }
 

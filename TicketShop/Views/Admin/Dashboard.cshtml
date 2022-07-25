@@ -10,53 +10,55 @@
             <h2>Movies</h2>
             @foreach (var movie in Model.Movies)
             {
-                <div>
-                    <img src="@movie.MovieImageUrl" alt="Movie Poster" />
-                    <h2>@movie.MovieTitle</h2>
-                    <p>@movie.MovieSynopsis</p>
-                    <h5>@movie.MovieLength</h5>
-                    <p>@movie.MovieGenre</p>
-                </div>
-                <form method="post">
-                    <label asp-for="Movie.MovieImageUrl">Image URL</label>
-                    <input asp-for="Movie.MovieImageUrl" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieImageUrl" />
+        <div class="card card-body" style="width: 22rem; padding-top: 1rem;">
+            <img src="@movie.MovieImageUrl" alt="Movie Poster" />
+            <h3>@movie.MovieTitle</h3>
+            <p>@movie.MovieSynopsis</p>
+            <h5>@movie.MovieLength</h5>
+            <p>@movie.MovieGenre</p>
 
-                    <label asp-for="Movie.MovieTitle">Movie Title</label>
-                    <input asp-for="Movie.MovieTitle" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieTitle" />
+            <form method="post">
+                <label asp-for="Movie.MovieImageUrl">Image URL</label>
+                <input asp-for="Movie.MovieImageUrl" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieImageUrl" />
 
-                    <label asp-for="Movie.MovieSynopsis">Movie Synopsis</label>
-                    <input asp-for="Movie.MovieSynopsis" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieSynopsis" />
+                <label asp-for="Movie.MovieTitle">Movie Title</label>
+                <input asp-for="Movie.MovieTitle" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieTitle" />
 
-                    <label asp-for="Movie.MovieLength">Movie Length</label>
-                    <input asp-for="Movie.MovieLength" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieLength" />
+                <label asp-for="Movie.MovieSynopsis">Movie Synopsis</label>
+                <input asp-for="Movie.MovieSynopsis" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieSynopsis" />
 
-                    <label asp-for="Movie.MovieGenre">Movie Genre</label>
-                    <input asp-for="Movie.MovieGenre" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieGenre" />
+                <label asp-for="Movie.MovieLength">Movie Length</label>
+                <input asp-for="Movie.MovieLength" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieLength" />
 
-                    <input asp-for="Movie.MovieId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@movie.MovieId" />
-                    <button type="submit">Apply Changes</button>
-                </form>
+                <label asp-for="Movie.MovieGenre">Movie Genre</label>
+                <input asp-for="Movie.MovieGenre" asp-controller="admin" asp-action="dashboard" type="text" value="@movie.MovieGenre" />
+
+                <input asp-for="Movie.MovieId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@movie.MovieId" />
+                <button type="submit">Apply Changes</button>
+            </form>
+        </div>
             }
         </div>
         <div class="tickets">
             <h2>Tickets</h2>
             @foreach (var ticket in Model.Tickets)
             {
-                <div>
-                    <p>@ticket.TicketPrice</p>
-                    <p>@ticket.TicketStock</p>
-                    <h3>@ticket.TicketIsInStock</h3>
-                </div>
-                <form method="post">
-                    <label asp-for="Ticket.TicketPrice">Price</label>
-                    <input asp-for="Ticket.TicketPrice" asp-controller="admin" asp-action="dashboard" type="text" value="@ticket.TicketPrice"/>
+        <div class="card card-body" style="width: 22rem; padding-top: 1rem;">
+            <p>Price: @ticket.TicketPrice</p>
+            <p>In stock: @ticket.TicketStock</p>
+            <p>Is in stock? @ticket.TicketIsInStock</p>
 
-                    <label asp-for="Ticket.TicketStock">Stock</label>
-                    <input asp-for="Ticket.TicketStock" asp-controller="admin" asp-action="dashboard" type="number" value="@ticket.TicketStock"/>
+            <form method="post">
+                <label asp-for="Ticket.TicketPrice">Price</label>
+                <input asp-for="Ticket.TicketPrice" asp-controller="admin" asp-action="dashboard" type="text" value="@ticket.TicketPrice" />
 
-                    <input asp-for="Ticket.TicketId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@ticket.TicketId" />
-                    <button type="submit">Apply Changes</button>
-                </form>
+                <label asp-for="Ticket.TicketStock">Stock</label>
+                <input asp-for="Ticket.TicketStock" asp-controller="admin" asp-action="dashboard" type="number" value="@ticket.TicketStock" />
+
+                <input asp-for="Ticket.TicketId" asp-controller="admin" asp-action="dashboard" type="hidden" value="@ticket.TicketId" />
+                <button type="submit">Apply Changes</button>
+            </form>
+        </div>
             }
         </div>
     </div>
