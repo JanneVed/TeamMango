@@ -11,22 +11,24 @@
             <form asp-controller="Admin" asp-action="AddOrRemove" method="post">
                 <label asp-for="Movie.MovieImageUrl">Image URL</label>
                 <input asp-for="Movie.MovieImageUrl" asp-controller="admin" asp-action="addorremove" type="text" />
-
+                <br />
                 <label asp-for="Movie.MovieTitle">Movie Title</label>
                 <input asp-for="Movie.MovieTitle" asp-controller="admin" asp-action="addorremove" type="text" />
-
+                <br />
                 <label asp-for="Movie.MovieSynopsis">Movie Synopsis</label>
                 <input asp-for="Movie.MovieSynopsis" asp-controller="admin" asp-action="addorremove" type="text" />
-
+                <br />
                 <label asp-for="Movie.MovieLength">Movie Length</label>
                 <input asp-for="Movie.MovieLength" asp-controller="admin" asp-action="addorremove" type="text" />
-
+                <br />
                 <label asp-for="Movie.MovieGenre">Movie Genre</label>
                 <input asp-for="Movie.MovieGenre" asp-controller="admin" asp-action="addorremove" type="text" />
-
+                <br />
                 <input asp-for="MovieOrTicket" asp-controller="admin" asp-action="addorremove" type="hidden" value="Movie" readonly="readonly"/>
                 <input asp-for="AddOrRemove" asp-controller="admin" asp-action="addorremove" type="hidden" value="Add" readonly="readonly"/>
+                
                 <button type="submit">Add</button>
+                <br />
             </form>
         </div>
         
@@ -35,16 +37,17 @@
             <form asp-controller="Admin" asp-action="AddOrRemove" method="post">
                 <label asp-for="Ticket.TicketPrice">Price</label>
                 <input asp-for="Ticket.TicketPrice" asp-controller="admin" asp-action="addorremove" type="text" />
-
+                <br />
                 <label asp-for="Ticket.TicketStock">Stock</label>
                 <input asp-for="Ticket.TicketStock" asp-controller="admin" asp-action="addorremove" type="number" />
-
+                <br />
                 <label asp-for="Ticket.MovieId">Movie ID</label>
                 <input asp-for="Ticket.MovieId" asp-controller="admin" asp-action="addorremove" type="number" />
-
+                <br />
                 <input asp-for="Ticket.TicketIsInStock" asp-controller="admin" asp-action="addorremove" type="hidden" value="True" readonly="readonly" />
                 <input asp-for="MovieOrTicket" asp-controller="admin" asp-action="addorremove" type="hidden" value="Ticket" readonly="readonly" />
                 <input asp-for="AddOrRemove" asp-controller="admin" asp-action="addorremove" type="hidden" value="Add" readonly="readonly" />
+                
                 <button type="submit">ADD</button>
             </form>
         </div>

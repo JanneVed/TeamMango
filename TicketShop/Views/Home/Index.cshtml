@@ -31,9 +31,10 @@
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <label asp-for="Amount">How many tickets do you need?</label>
                         <input asp-for="Amount" asp-controller="home" asp-action="checkout" type="number" />
+                        <br />
                         <input asp-for="TicketId" asp-controller="home" asp-action="checkout" type="hidden" value="@ticketModel.TicketId" readonly="readonly" />
                         <input asp-for="MovieId" asp-controller="home" asp-action="checkout" type="hidden" value="@movieModel.MovieId" readonly="readonly" />
-
+                        <br />
                         <button type="submit">Buy</button>
                     </form>
                 }
