@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DeployConnection",
+      "suggestion": "true",
+      "ignored": "true"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DevelopmentConnection",
+      "suggestion": "true",
+      "ignored": "true"
+    },
+    "mssql3": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/ticketshopdbserver/databases/TicketShop_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:ConnectionString",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

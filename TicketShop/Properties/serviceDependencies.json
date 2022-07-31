@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:ConnectionString"
+    }
+  }
+}
